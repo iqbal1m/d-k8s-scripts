@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: DaemonSet 
+metadata:
+    name: helloworld
+spec: 
+  selector:
+    matchLabels:
+         app: helloworld-pod
+  template: 
+      metadata: 
+        labels:
+          app: helloworld-pod
+      spec:  
+        nodeSelector:
+               env: "prod"
+        containers:
+        - name: helloworld
+          image: miqbal21/webserver:devops

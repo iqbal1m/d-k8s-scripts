@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: mc-pod
+spec: 
+  containers:
+  - name: producer
+    image: ubuntu
+    command: ["/bin/bash"]
+    args: ["-c", "while true; do echo $(date) >> /var/log/index.html; sleep 15; done"]
+    volumeMounts:
+    - name: webcontent
+      mountPath: /var/log
+  - name: consumer
+    image: miqbal21/webserver:devops
+    ports:
+      - containerPort: 80
+    volumeMounts:
+    - name: webcontent
+      mountPath: /var/www/html
+  volumes: 
+  - name: webcontent
+    emptyDir: {}

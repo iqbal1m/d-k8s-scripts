@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+    name: helloworld
+spec: 
+    replicas: 3
+    selector: 
+      matchLabels: 
+         app: helloworld
+    template: 
+      metadata: 
+        labels:
+          app: helloworld
+      spec:  
+        containers:
+        - name: helloworld
+          image: miqbal21/webserver:devops
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: helloworld
+spec:
+   type: NodePort
+   ports:
+   - protocol: TCP
+     port: 80
+     targetPort: 80
+     nodePort: 30080
+   selector:
+     app: helloworld

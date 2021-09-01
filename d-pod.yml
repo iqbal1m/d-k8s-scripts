@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: helloworld-dmn
+    namespace: awsaug
+spec: 
+    nodeSelector:
+         env: "prod"
+    containers:
+       - name: helloworld-dmn
+         image: miqbal21/webserver:devops

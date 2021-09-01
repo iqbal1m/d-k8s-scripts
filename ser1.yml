@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+    name: helloworld
+spec: 
+    replicas: 3
+    selector: 
+      matchLabels: 
+         app: helloworld-pod
+    template: 
+      metadata: 
+        labels:
+          app: helloworld-pod
+      spec:  
+        containers:
+        - name: helloworld
+          image: miqbal21/webserver:devops
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: helloworld-service
+spec:
+   type: ClusterIP
+   ports:
+   - protocol: TCP
+     port: 80
+     targetPort: 80
+   selector:
+     app: hellpworld-service

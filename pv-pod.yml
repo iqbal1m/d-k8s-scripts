@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod
+spec: 
+  containers:
+  - name: hello-ctr
+    image: miqbal21/webserver:devops
+    volumeMounts:
+      - name: data
+        mountPath: /data
+    ports:
+    - containerPort: 80
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: pvc-nfs-data
